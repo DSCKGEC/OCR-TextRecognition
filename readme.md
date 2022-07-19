@@ -1,22 +1,29 @@
-# Submission or project name
+# OCR Text Recognition
 
-[![Contributors](https://img.shields.io/github/contributors/dsckgec/project-template.svg)](https://github.com/dsckgec/project-template/graphs/contributors) [![Forks](https://img.shields.io/github/forks/dsckgec/project-template.svg)](https://github.com/dsckgec/project-template/network/members) [![Issues](https://img.shields.io/github/issues/dsckgec/project-template.svg)](https://github.com/dsckgec/project-template/issues) [![Pull Request](https://img.shields.io/github/issues-pr-closed-raw/dsckgec/project-template)](https://github.com/dsckgec/project-template/pulls)
+[![Contributors](https://img.shields.io/github/contributors/DSCKGEC/OCR-TextRecognition.svg)](https://github.com/dsckgec/project-template/graphs/contributors) [![Forks](https://img.shields.io/github/forks/DSCKGEC/OCR-TextRecognition.svg)](https://github.com/dsckgec/project-template/network/members) [![Issues](https://img.shields.io/github/issues/DSCKGEC/OCR-TextRecognition)](https://github.com/dsckgec/project-template/issues) [![Pull Request](https://img.shields.io/github/issues-pr-closed-raw/DSCKGEC/OCR-TextRecognition)](https://github.com/dsckgec/project-template/pulls)
 
 
-A basic GitHub repository template for initializing open source projects on a single click.
+Recognizes text from any images and prints them.
 
 ## Contents
 
-1. [Description](#description)
-1. [Project structure](#project-structure)
-1. [Project roadmap](#project-roadmap)
-1. [Getting started](#getting-started)
-1. [Live demo](#live-demo)
-1. [Built with](#built-with)
-1. [Contributing](#contributing)
-1. [Authors](#authors)
-1. [License](#license)
-1. [Acknowledgments](#acknowledgments)
+- [OCR Text Recognition](#ocr-text-recognition)
+  - [Contents](#contents)
+  - [Description](#description)
+    - [What's the problem?](#whats-the-problem)
+    - [How can this project help?](#how-can-this-project-help)
+    - [The idea](#the-idea)
+  - [Project structure](#project-structure)
+  - [Project roadmap](#project-roadmap)
+  - [Getting started](#getting-started)
+    - [Prerequisites](#prerequisites)
+    - [Installing](#installing)
+  - [Live demo](#live-demo)
+  - [Built with](#built-with)
+  - [Contributing](#contributing)
+  - [Authors](#authors)
+  - [License](#license)
+  - [Acknowledgments](#acknowledgments)
 
 ## Description
 
@@ -71,7 +78,7 @@ Please read [contributing.md](contributing.md) for details on our code of conduc
 ## Authors
 
 <a href="https://github.com/DSCKGEC/project-template/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=DSCKGEC/project-template" />
+  <img src="https://contrib.rocks/image?repo=DSCKGEC/OCR-TextRecognition" />
 </a>
 
 ## License
