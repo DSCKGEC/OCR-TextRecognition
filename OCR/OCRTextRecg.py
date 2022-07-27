@@ -3,6 +3,7 @@ import numpy as np
 import pytesseract
 import argparse
 import cv2
+import gradio as gr
 
 def decode_predictions(scores, geometry):
 	(numRows, numCols) = scores.shape[2:4]
@@ -31,6 +32,8 @@ def decode_predictions(scores, geometry):
 			rects.append((startX, startY, endX, endY))
 			confidences.append(scoresData[x])
 	return (rects, confidences)
+
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", type=str,
 	help="path to input image")
