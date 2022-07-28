@@ -1,15 +1,10 @@
-## RUN FILE normally -> python demo.py 
-
-from click import argument
 from imutils.object_detection import non_max_suppression
 import numpy as np
 import pytesseract
-import argparse
 import cv2
-import gradio as gr
 import json
 
-def decode_predictions(scores, geometry):
+def decode_predictions(scores, geometry, args):
 	(numRows, numCols) = scores.shape[2:4]
 	rects = []
 	confidences = []
@@ -37,10 +32,9 @@ def decode_predictions(scores, geometry):
 			confidences.append(scoresData[x])
 	return (rects, confidences)
 
-def predict(image, arguments):
-    # image - is an array
-    # arguments - will be a string containing dict, e.g -> "{'a':1, 'b': 2}"
-    args = json.loads(arguments)  # this will convert the string into dict to use it afterwards
+
+def predict(args):
+    image = cv2.imread(args["image"])  
     orig = image.copy()
     (origH, origW) = image.shape[:2]
     (newW, newH) = (args["width"], args["height"])
@@ -58,7 +52,7 @@ def predict(image, arguments):
         (123.68, 116.78, 103.94), swapRB=True, crop=False)
     net.setInput(blob)
     (scores, geometry) = net.forward(layerNames)
-    (rects, confidences) = decode_predictions(scores, geometry)
+    (rects, confidences) = decode_predictions(scores, geometry, args)
     boxes = non_max_suppression(np.array(rects), probs=confidences)
     results = []
     for (startX, startY, endX, endY) in boxes:
@@ -88,31 +82,32 @@ def predict(image, arguments):
         cv2.putText(output, text, (startX, startY - 20),
             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
 
-    return output
+    cv2.imwrite('text_detected.jpg', output)
 
-with gr.Blocks() as demo:
-    args = {}
-    gr.Markdown("## OCR")
-    with gr.Row():
-        args['east'] = gr.Textbox(placeholder="path to input EAST text detector", label = "EAST")
-        args['min_confidence'] = gr.Number(label = "min-confidence") 
-    with gr.Row():
-        args['width'] = gr.Number(label = "width", precision=0) 
-        args['height'] = gr.Number(label = "height", precision=0) 
-        args['padding'] = gr.Number(label = "padding") 
+    return "Image Saved in current running folder"
 
-    with gr.Row():
-        im_1 = gr.Image()
-        im_2 = gr.Image(label = "Output")
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+class Arguments(BaseModel):
+    image : str # Enter full image path
+    east : str  # full path of east file
+    min_confidence : float = 0.5 
+    width : int = 320
+    height : int = 320 
+    padding: float = 0.0
+
+app = FastAPI()
+
+@app.post("/upload/")
+async def home(args: Arguments):
+
+    try:
+        args = args.__dict__
+        confirmation = predict(args)
+        return confirmation
+    except Exception as e:
+        return f"The Text Detected Image could not be saved\n {e}"
+        
+
     
-    btn = gr.Button(value="Submit")
-
-    # here we can pass the args as input to the below button as string -> str(args)
-    btn.click(predict, inputs=[im_1]#, str(args)]
-    , outputs=[im_2])
-
-if __name__ == "__main__":
-    demo.launch()
-
-#image = cv2.imread(args["image"])
-#Image Input from which text to read
