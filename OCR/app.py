@@ -1,3 +1,4 @@
+## To run file -> uvicorn app:app --reload
 from imutils.object_detection import non_max_suppression
 import numpy as np
 import pytesseract
@@ -82,7 +83,7 @@ def predict(args):
         cv2.putText(output, text, (startX, startY - 20),
             cv2.FONT_HERSHEY_SIMPLEX, 1.2, (0, 0, 255), 3)
 
-    cv2.imwrite('text_detected.jpg', output)
+    cv2.imwrite('text_detected.jpg', output) # save the edited image
 
     return "Image Saved in current running folder"
 
@@ -106,6 +107,7 @@ async def home(args: Arguments):
         args = args.__dict__
         confirmation = predict(args)
         return confirmation
+        
     except Exception as e:
         return f"The Text Detected Image could not be saved\n {e}"
         
