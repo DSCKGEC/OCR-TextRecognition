@@ -3,7 +3,6 @@ import numpy as np
 import pytesseract
 import argparse
 import cv2
-import gradio as gr
 
 def decode_predictions(scores, geometry):
 	(numRows, numCols) = scores.shape[2:4]
