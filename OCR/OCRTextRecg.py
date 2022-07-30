@@ -31,6 +31,8 @@ def decode_predictions(scores, geometry):
 			rects.append((startX, startY, endX, endY))
 			confidences.append(scoresData[x])
 	return (rects, confidences)
+
+
 ap = argparse.ArgumentParser()
 ap.add_argument("-i", "--image", type=str,
 	help="path to input image")
