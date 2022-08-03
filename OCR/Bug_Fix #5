@@ -1,7 +1,12 @@
-**ISSUE - #5**
+**ISSUE - #3**
+BUG - "State the layer names"
+To resolve this bug go to OCRTextRecg.py file and remove #(hash)symbol in 50th , 60th , 61st and 62nd line .
 
-**BUG-NoneType object has no attribute 'copy' **
 
+**ISSUE - #4 & #5**
+**BUGS - "Image input data" & "NoneType object has no attribute 'copy'"**
+
+                                                               REASON
 This error occured due to not providing the file path or invalid file path given to cv2.imread function . Actually cv2.imread does not explicitely throws an error that given path is invalid instead it will return None.
 There's a line in OCRTextRecg.py file --> image = cv2.imread(args["image"]) . If you clearly observe there's a variable called "args" . This variable contains all arguments which is need to be parsed.
 This is one of the argument in the args variable.
@@ -13,11 +18,24 @@ ap.add_argument("-east", "--east", type=str,
 help="path to input EAST text detector")
 This requests user to provide the file path of east text detector
 
-TYPE 1 OF RUNNING THIS PYTHON FILE
+TYPE 1 OF RUNNING THIS PYTHON FILE(WRONG WAY)
 We will typically click on 'RUN' option to run this script , it tries to get the file path , error occurs
 
+                                                              SOLUTION
 HOW WE NEED TO RUN THIS SCRIPT
 1)Open the working directory of file in command prompt
 2) enter python OCRTextRecg.py -i=complete file path of the image -east=complete file path of East text detector
 for example : OCRTextRecg.py -i=C:\Users\Dell\Desktop\tess\image.jpg
 -east=C:\Users\Dell\Desktop\tess\frozen_east_test_detection.pb
+
+
+**ISSUE - #6**
+**EAST TEXT DETECTOR NOT MENTIONED**
+
+https://www.dropbox.com/s/r2ingd0l3zt8hxs/frozen_east_text_detection.tar.gz?dl=1
+Download the model using the above link , extract it . You will receive a .pb file .
+Copy and paste it to the working directory of the script
+Open working directory in command prompt ,
+Type python OCRTextRecg.py -i=complete file path of the image   -east=complete file path of East text detector
+
+ 
